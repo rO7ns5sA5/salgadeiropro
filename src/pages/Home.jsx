@@ -52,7 +52,7 @@ export default function Home() {
 
   return (
     <PageLayout>
-      <div className="px-4 pt-5 pb-2">
+      <div className="px-5 pt-5 pb-2">
         <p className="text-2xl font-bold" style={{ color: '#1A1A1A' }}>
           Olá, produtor! 👋
         </p>
@@ -62,7 +62,7 @@ export default function Home() {
       </div>
 
       {/* Banner hero */}
-      <div className="px-4 mt-3">
+      <div className="px-5 mt-3">
         <div
           className="relative rounded-xl overflow-hidden"
           style={{ height: 180, borderRadius: 12 }}
@@ -95,7 +95,7 @@ export default function Home() {
       </div>
 
       {/* Grid de módulos */}
-      <div className="px-4 mt-5 mb-2">
+      <div className="px-5 mt-5 mb-2">
         <p className="font-bold text-base mb-3" style={{ color: '#1A1A1A' }}>
           O que você precisa hoje?
         </p>
