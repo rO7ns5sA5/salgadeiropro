@@ -13,8 +13,6 @@ export default function Header({ titulo, voltar = false, direita = null, dark = 
       style={{
         backgroundColor: bg,
         height: 56,
-        maxWidth: 480,
-        margin: '0 auto',
       }}
     >
       {voltar ? (

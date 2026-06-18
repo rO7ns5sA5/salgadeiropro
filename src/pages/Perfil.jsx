@@ -43,13 +43,13 @@ export default function Perfil() {
       {/* Avatar + info */}
       <div className="px-4 pt-5 flex flex-col items-center text-center">
         <div
-          className="w-20 h-20 rounded-full flex items-center justify-center mb-3"
-          style={{ backgroundColor: '#2C1A0E', border: '3px solid #C49A2A' }}
+          className="w-20 h-20 rounded-full overflow-hidden mb-3"
+          style={{ border: '3px solid #C49A2A' }}
         >
-          <User size={36} color="#C49A2A" />
+          <img src="/images/especialista.jpeg" alt="Roberto" className="w-full h-full object-cover" />
         </div>
-        <p className="font-bold text-xl" style={{ color: '#1A1A1A' }}>{usuario.nome}</p>
-        <p className="text-sm mt-0.5" style={{ color: '#9CA3AF' }}>{usuario.email}</p>
+        <p className="font-bold text-xl" style={{ color: '#1A1A1A' }}>Roberto Nunes</p>
+        <p className="text-sm mt-0.5" style={{ color: '#9CA3AF' }}>robertons5sa5@gmail.com</p>
         <p className="text-xs mt-1" style={{ color: '#6B7280' }}>
           Membro desde {usuario.membro_desde}
         </p>
@@ -160,7 +160,7 @@ export default function Perfil() {
       </div>
 
       <p className="text-center text-xs pb-4" style={{ color: '#D1D5DB' }}>
-        SalgadeiroPro v1.0 · RNS Artefatos / Compacta Print
+        Salgadeiro Pro v1.0 · RNS Artefatos / Compacta Print
       </p>
     </PageLayout>
   )
