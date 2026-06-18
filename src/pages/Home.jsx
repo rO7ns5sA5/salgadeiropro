@@ -57,7 +57,7 @@ export default function Home() {
           Olá, produtor! 👋
         </p>
         <p className="text-sm mt-1" style={{ color: '#6B7280' }}>
-          Bem-vindo ao SalgadeiroPro
+          Bem-vindo ao Salgadeiro Pro
         </p>
       </div>
 

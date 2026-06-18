@@ -1,6 +1,6 @@
 {
-  "name": "SalgadeiroPro",
-  "short_name": "SalgadeiroPro",
+  "name": "Salgadeiro Pro",
+  "short_name": "Salgadeiro Pro",
   "description": "O app profissional para produtores de salgados brasileiros",
   "start_url": "/",
   "display": "standalone",

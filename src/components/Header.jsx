@@ -29,7 +29,7 @@ export default function Header({ titulo, voltar = false, direita = null, dark = 
         </button>
       ) : (
         <span className="font-bold text-lg" style={{ color: '#FFFFFF', letterSpacing: '-0.3px' }}>
-          SalgadeiroPro
+          Salgadeiro Pro
         </span>
       )}
 
