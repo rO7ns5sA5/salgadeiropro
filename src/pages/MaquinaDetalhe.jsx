@@ -247,8 +247,8 @@ export default function MaquinaDetalhe() {
     <PageLayout dark semHeader>
       {/* Header manual dark */}
       <div
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4"
-        style={{ backgroundColor: '#061423', height: 56, maxWidth: 480, margin: '0 auto', borderBottom: '1px solid rgba(196,154,42,0.15)' }}
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5"
+        style={{ backgroundColor: '#061423', height: 60, maxWidth: 480, margin: '0 auto', borderBottom: '1px solid rgba(196,154,42,0.15)' }}
       >
         <button onClick={() => navigate(-1)} className="w-8 h-8 flex items-center justify-center"
           style={{ color: '#C49A2A' }}>
@@ -263,10 +263,10 @@ export default function MaquinaDetalhe() {
         <div className="w-8" />
       </div>
 
-      <div style={{ paddingTop: 56, paddingBottom: 80 }}>
+      <div style={{ paddingTop: 60, paddingBottom: 96 }}>
         {/* Banner máquina */}
         <div
-          className="mx-4 mt-4 p-4 rounded-xl flex items-center gap-4"
+          className="mx-5 mt-4 p-4 rounded-xl flex items-center gap-4"
           style={{ background: 'linear-gradient(135deg, #0D2137 0%, #1a3a5c 100%)', border: '1px solid rgba(196,154,42,0.3)', borderRadius: 12 }}
         >
           <div
@@ -288,7 +288,7 @@ export default function MaquinaDetalhe() {
 
         {/* Cards de capacidade */}
         {maquina.capacidadeKg && (
-          <div className="mx-4 mt-3 grid grid-cols-2 gap-2">
+          <div className="mx-5 mt-3 grid grid-cols-2 gap-2">
             <div className="p-3 rounded-xl text-center"
               style={{ backgroundColor: 'rgba(196,154,42,0.1)', border: '1px solid rgba(196,154,42,0.2)' }}>
               <p className="text-2xl font-bold" style={{ color: '#C49A2A' }}>{maquina.capacidadeKg}<span className="text-sm">kg</span></p>
@@ -302,7 +302,7 @@ export default function MaquinaDetalhe() {
           </div>
         )}
 
-        <div className="px-4 mt-4 space-y-4">
+        <div className="px-5 mt-4 space-y-4">
           {/* Especificações técnicas */}
           <div className="p-4 rounded-xl" style={{ backgroundColor: '#0D2137', borderRadius: 12 }}>
             <div className="flex items-center gap-2 mb-3">
@@ -349,7 +349,7 @@ export default function MaquinaDetalhe() {
 
           {/* Bicos disponíveis */}
           <div className="rounded-xl overflow-hidden" style={{ backgroundColor: '#0D2137', borderRadius: 12 }}>
-            <div className="flex items-center gap-2 px-4 py-3 border-b"
+            <div className="flex items-center gap-2 px-5 py-3 border-b"
               style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
               <Wrench size={16} color="#C49A2A" />
               <p className="font-bold text-sm" style={{ color: '#C49A2A' }}>Bicos Disponíveis</p>
@@ -394,7 +394,7 @@ export default function MaquinaDetalhe() {
             const isSupreme = escala === 5
             return (
               <div className="rounded-xl overflow-hidden" style={{ backgroundColor: '#0D2137' }}>
-                <div className="flex items-center justify-between px-4 py-3 border-b" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
+                <div className="flex items-center justify-between px-5 py-3 border-b" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
                   <div className="flex items-center gap-2">
                     <Settings size={16} color="#C49A2A" />
                     <p className="font-bold text-sm" style={{ color: '#C49A2A' }}>Tabela de Calibragem do Painel</p>
@@ -404,7 +404,7 @@ export default function MaquinaDetalhe() {
                     escala 0–{escala}
                   </span>
                 </div>
-                <div className="grid px-4 py-2 border-b" style={{ gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr', borderColor: 'rgba(255,255,255,0.06)' }}>
+                <div className="grid px-5 py-2 border-b" style={{ gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr', borderColor: 'rgba(255,255,255,0.06)' }}>
                   {[isSupreme ? 'M / R / PESO' : 'BICO / PESO', 'MASSA', 'RECHEIO', 'CORT.', 'TEMPO'].map(h => (
                     <p key={h} className="text-xs font-bold text-center" style={{ color: '#6B7280' }}>{h}</p>
                   ))}
@@ -413,7 +413,7 @@ export default function MaquinaDetalhe() {
                   const pesoLabel = c.peso ? `${c.peso}g` : `${c.pesoMin}–${c.pesoMax}g`
                   const bicoLabel = isSupreme ? `M${c.bicoMassa}/R${c.bicoRecheio}` : `Bico ${c.bico}`
                   return (
-                    <div key={i} className="grid px-4 py-3 border-b"
+                    <div key={i} className="grid px-5 py-3 border-b"
                       style={{
                         gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr',
                         borderColor: 'rgba(255,255,255,0.06)',
@@ -443,7 +443,7 @@ export default function MaquinaDetalhe() {
                     </div>
                   )
                 })}
-                <div className="px-4 py-2">
+                <div className="px-5 py-2">
                   <p className="text-xs" style={{ color: '#6B7280' }}>
                     {isSupreme
                       ? 'Escala 1–5 (potenciômetros analógicos). M = Bico de Massa, R = Bico de Recheio.'
@@ -494,13 +494,13 @@ export default function MaquinaDetalhe() {
           {maquina.problemasComuns && (
             <div className="rounded-xl overflow-hidden"
               style={{ backgroundColor: '#0D2137', borderRadius: 12 }}>
-              <div className="flex items-center gap-2 px-4 py-3 border-b"
+              <div className="flex items-center gap-2 px-5 py-3 border-b"
                 style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
                 <Wrench size={16} color="#C49A2A" />
                 <p className="font-bold text-sm" style={{ color: '#C49A2A' }}>Problemas Comuns</p>
               </div>
               {maquina.problemasComuns.map((p, i) => (
-                <div key={i} className="px-4 py-3 border-b"
+                <div key={i} className="px-5 py-3 border-b"
                   style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
                   <p className="text-sm font-bold" style={{ color: '#FFFFFF' }}>{p.problema}</p>
                   <p className="text-xs mt-1" style={{ color: '#9CA3AF' }}>{p.solucao}</p>
@@ -536,7 +536,8 @@ export default function MaquinaDetalhe() {
         style={{
           backgroundColor: '#061423',
           borderTop: '1px solid rgba(196,154,42,0.2)',
-          height: 64,
+          height: 72,
+          paddingBottom: 'env(safe-area-inset-bottom)',
           maxWidth: 480,
           margin: '0 auto',
         }}
@@ -550,9 +551,9 @@ export default function MaquinaDetalhe() {
           <button
             key={path}
             onClick={() => navigate(path)}
-            className="flex-1 flex flex-col items-center justify-center gap-0.5 py-2"
+            className="flex-1 flex flex-col items-center justify-center gap-1 py-2.5"
           >
-            <span className="text-xs font-medium" style={{ color: ativo ? '#C49A2A' : '#6B7280' }}>
+            <span className="text-sm font-medium" style={{ color: ativo ? '#C49A2A' : '#6B7280' }}>
               {label}
             </span>
           </button>

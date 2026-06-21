@@ -13,7 +13,7 @@ export default function Maquinas() {
   return (
     <PageLayout dark titulo="Máquinas">
       {/* Subtítulo */}
-      <div className="px-4 pt-4 pb-2">
+      <div className="px-5 pt-4 pb-2">
         <p className="text-xs font-bold tracking-widest uppercase" style={{ color: '#C49A2A' }}>
           Compacta Print
         </p>
@@ -26,7 +26,7 @@ export default function Maquinas() {
       </div>
 
       {/* Carrossel de seleção */}
-      <div className="px-4 mt-2">
+      <div className="px-5 mt-2">
         <div className="flex gap-3 overflow-x-auto pb-2" style={{ scrollbarWidth: 'none' }}>
           {maquinas.map((m) => {
             const ativa = m.id === selecionada
@@ -34,9 +34,9 @@ export default function Maquinas() {
               <button
                 key={m.id}
                 onClick={() => setSelecionada(m.id)}
-                className="flex-shrink-0 p-3 rounded-xl text-left transition-all"
+                className="flex-shrink-0 p-4 rounded-xl text-left transition-all"
                 style={{
-                  width: 140,
+                  width: 152,
                   backgroundColor: ativa ? 'rgba(196,154,42,0.12)' : '#0D2137',
                   border: ativa ? '2px solid #C49A2A' : '1px solid rgba(255,255,255,0.08)',
                   borderRadius: 12,
@@ -72,7 +72,7 @@ export default function Maquinas() {
 
       {/* Ficha técnica da máquina selecionada */}
       {maquina && (
-        <div className="px-4 mt-4 space-y-3 pb-4">
+        <div className="px-5 mt-4 space-y-3 pb-4">
           {/* Header da ficha */}
           <div
             className="p-4 rounded-xl"
@@ -192,7 +192,7 @@ function Accordion({ titulo, itens, cor }) {
       style={{ backgroundColor: '#0D2137', borderRadius: 12 }}
     >
       <button
-        className="w-full flex justify-between items-center px-4 py-3"
+        className="w-full flex justify-between items-center px-5 py-3"
         onClick={() => setAberto((v) => !v)}
       >
         <p className="font-bold text-sm" style={{ color: '#FFFFFF' }}>{titulo}</p>
@@ -201,7 +201,7 @@ function Accordion({ titulo, itens, cor }) {
         </span>
       </button>
       {aberto && (
-        <div className="px-4 pb-4 space-y-2 border-t" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
+        <div className="px-5 pb-4 space-y-2 border-t" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
           {itens.map((item, i) => (
             <div key={i} className="flex gap-2 pt-2">
               <span style={{ color: cor }}>•</span>

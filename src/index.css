@@ -1,13 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
+@theme {
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.45;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.5;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.6;
+  --text-lg: 1.1875rem;
+  --text-lg--line-height: 1.5;
+  --text-xl: 1.3125rem;
+  --text-xl--line-height: 1.4;
+  --text-2xl: 1.5625rem;
+  --text-2xl--line-height: 1.3;
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: 1.25;
+}
+
 :root {
-  --color-marrom: #2C1A0E;
-  --color-creme: #F5F0E8;
-  --color-dourado: #C49A2A;
-  --color-navy: #061423;
-  --color-branco: #FFFFFF;
-  --color-texto: #1A1A1A;
+  --color-gold:   #C9932A;
+  --color-navy:   #0B1729;
+  --color-fundo:  #FAFAFA;
+  --color-card:   #FFFFFF;
+  --color-borda:  #E5E5E5;
+  --color-texto:  #1A1A1A;
+  --color-sub:    #666666;
+  --color-muted:  #9CA3AF;
 }
 
 * {
@@ -18,17 +37,41 @@
 
 body {
   font-family: 'Hanken Grotesk', system-ui, sans-serif;
-  background-color: var(--color-creme);
+  background-color: var(--color-fundo);
   color: var(--color-texto);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 17px;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  text-rendering: optimizeLegibility;
   max-width: 480px;
   margin: 0 auto;
   min-height: 100svh;
   position: relative;
 }
 
+h1, h2, h3, h4 {
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
 #root {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  cursor: pointer;
+}
+input[type='range']::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-borda);
 }
