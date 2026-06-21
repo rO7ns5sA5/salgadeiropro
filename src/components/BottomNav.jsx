@@ -1,12 +1,13 @@
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Home, BookOpen, Wrench, GraduationCap, User } from 'lucide-react'
+import { Home, BookOpen, Wrench, GraduationCap, User, Bot } from 'lucide-react'
 
 const navItems = [
-  { label: 'Início',      icon: Home,           path: '/' },
-  { label: 'Receitas',    icon: BookOpen,        path: '/receitas' },
-  { label: 'Ferramentas', icon: Wrench,          path: '/calculadora' },
-  { label: 'Aprender',    icon: GraduationCap,   path: '/treinamentos' },
-  { label: 'Perfil',      icon: User,            path: '/perfil' },
+  { label: 'Início',       icon: Home,          path: '/' },
+  { label: 'Receitas',     icon: BookOpen,       path: '/receitas' },
+  { label: 'Ferramentas',  icon: Wrench,         path: '/calculadora' },
+  { label: 'Aprender',     icon: GraduationCap,  path: '/treinamentos' },
+  { label: 'Especialista', icon: Bot,            path: '/especialista', badge: 'IA' },
+  { label: 'Perfil',       icon: User,           path: '/perfil' },
 ]
 
 export default function BottomNav({ dark = false }) {
@@ -27,7 +28,7 @@ export default function BottomNav({ dark = false }) {
         margin: '0 auto',
       }}
     >
-      {navItems.map(({ label, icon: Icon, path }) => {
+      {navItems.map(({ label, icon: Icon, path, badge }) => {
         const active = pathname === path || (path !== '/' && pathname.startsWith(path))
         const activeColor = '#C49A2A'
         const inactiveColor = dark ? '#6B7280' : '#9CA3AF'
@@ -39,7 +40,26 @@ export default function BottomNav({ dark = false }) {
             onClick={() => navigate(path)}
             className="flex flex-col items-center justify-center flex-1 gap-0.5 py-2"
           >
-            <Icon size={22} color={color} strokeWidth={active ? 2.5 : 1.8} />
+            <div className="relative">
+              <Icon size={22} color={color} strokeWidth={active ? 2.5 : 1.8} />
+              {badge && (
+                <span
+                  className="absolute font-bold"
+                  style={{
+                    top: -5,
+                    right: -10,
+                    fontSize: 8,
+                    lineHeight: 1,
+                    backgroundColor: '#C49A2A',
+                    color: '#0B1729',
+                    borderRadius: 3,
+                    padding: '1px 3px',
+                  }}
+                >
+                  {badge}
+                </span>
+              )}
+            </div>
             <span
               className="text-xs font-medium"
               style={{ color, fontSize: 10 }}
