@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Splash from './pages/Splash'
+import Onboarding from './pages/Onboarding'
 import Home from './pages/Home'
 import Receitas from './pages/Receitas'
 import ReceitaDetalhe from './pages/ReceitaDetalhe'
@@ -17,6 +18,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Splash />} />
+        <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/home" element={<Home />} />
         <Route path="/receitas" element={<Receitas />} />
         <Route path="/receitas/:id" element={<ReceitaDetalhe />} />

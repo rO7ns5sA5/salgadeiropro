@@ -19,7 +19,8 @@ export default function Splash() {
         const next = prev + Math.random() * 18
         if (next >= 100) {
           clearInterval(interval)
-          setTimeout(() => navigate('/home'), 400)
+          const destino = localStorage.getItem('onboarding_concluido') ? '/home' : '/onboarding'
+          setTimeout(() => navigate(destino), 400)
           return 100
         }
         const idx = Math.floor((next / 100) * (loadingSteps.length - 1))
