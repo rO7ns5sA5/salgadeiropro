@@ -9,7 +9,7 @@ const slides = [
     bg: 'linear-gradient(135deg, #1E3A5F 0%, #0B1729 100%)',
     visual: (
       <div style={{ width: '100%', height: 200, borderRadius: 16, overflow: 'hidden', position: 'relative' }}>
-        <img src="/images/mesa_produção.jpeg" alt="Produção de salgados" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <img src="/images/mesa+produção.png" alt="Produção de salgados" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #0B1729 0%, transparent 60%)' }} />
       </div>
     ),
