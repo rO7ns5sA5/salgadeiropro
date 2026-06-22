@@ -8,12 +8,8 @@ const slides = [
     descricao: 'Aprenda a produzir salgados com padrão, cálculo e técnica profissional.',
     bg: 'linear-gradient(135deg, #1E3A5F 0%, #0B1729 100%)',
     visual: (
-      <div style={{ width: '100%', height: 200, background: 'linear-gradient(135deg, #0F2040 0%, #1E3A5F 100%)', borderRadius: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 8, padding: 16 }}>
-          {Array.from({ length: 24 }).map((_, i) => (
-            <div key={i} style={{ width: 28, height: 36, background: 'linear-gradient(180deg, #C9932A 0%, #A07020 100%)', borderRadius: '50% 50% 40% 40%', opacity: 0.85 + (i % 3) * 0.05 }} />
-          ))}
-        </div>
+      <div style={{ width: '100%', height: 200, borderRadius: 16, overflow: 'hidden', position: 'relative' }}>
+        <img src="/images/mesa_produção.jpeg" alt="Produção de salgados" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #0B1729 0%, transparent 60%)' }} />
       </div>
     ),
