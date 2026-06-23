@@ -1,13 +1,33 @@
-const CACHE_NAME = 'salgadeiropro-v1'
+const CACHE_NAME = 'salgadeiropro-v2'
 
 const STATIC_ASSETS = [
   '/',
   '/index.html',
+  '/manifest.json',
+  '/favicon.svg',
+  '/images/banner_boteco.jpeg',
+  '/images/logo_splash.png',
+  '/images/especialista.jpeg',
+  '/images/coxinha.jpeg',
+  '/images/kibe_carne.jpeg',
+  '/images/risole_tracesseiro.jpeg',
+  '/images/enroladinho_salsicha.jpeg',
+  '/images/esfirra.jpeg',
+  '/images/bolinho_feijoada.jpeg',
+  '/images/mini_pasteis.jpeg',
+  '/images/mesa+produção.png',
+  '/icons/icon-192.png',
+  '/icons/icon-192.svg',
+  '/icons/icon-512.svg',
 ]
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(STATIC_ASSETS))
+    caches.open(CACHE_NAME).then((cache) => {
+      return Promise.allSettled(
+        STATIC_ASSETS.map((url) => cache.add(url).catch(() => {}))
+      )
+    })
   )
   self.skipWaiting()
 })
@@ -22,36 +42,64 @@ self.addEventListener('activate', (e) => {
 })
 
 self.addEventListener('fetch', (e) => {
-  // Não intercepta requisições para APIs externas
+  const url = new URL(e.request.url)
+
+  // Não intercepta APIs externas
   if (
-    e.request.url.includes('api.anthropic.com') ||
-    e.request.url.includes('supabase.co') ||
-    e.request.url.includes('unsplash.com')
+    url.hostname.includes('anthropic.com') ||
+    url.hostname.includes('supabase.co') ||
+    url.hostname.includes('googleapis.com')
   ) {
     return
   }
 
-  // Estratégia: Network First com fallback para cache (para navegação)
+  // Navegação: Network First com fallback para index.html (SPA)
   if (e.request.mode === 'navigate') {
     e.respondWith(
-      fetch(e.request).catch(() =>
-        caches.match('/index.html')
-      )
+      fetch(e.request)
+        .then((res) => {
+          const clone = res.clone()
+          caches.open(CACHE_NAME).then((cache) => cache.put(e.request, clone))
+          return res
+        })
+        .catch(() => caches.match('/index.html'))
     )
     return
   }
 
-  // Cache First para assets estáticos (JS, CSS, fontes)
+  // Cache First para imagens e assets estáticos
+  if (
+    e.request.destination === 'image' ||
+    e.request.destination === 'font' ||
+    url.pathname.startsWith('/icons/') ||
+    url.pathname.startsWith('/images/')
+  ) {
+    e.respondWith(
+      caches.match(e.request).then((cached) => {
+        if (cached) return cached
+        return fetch(e.request).then((res) => {
+          if (res.ok) {
+            const clone = res.clone()
+            caches.open(CACHE_NAME).then((cache) => cache.put(e.request, clone))
+          }
+          return res
+        }).catch(() => cached)
+      })
+    )
+    return
+  }
+
+  // Stale While Revalidate para JS/CSS
   e.respondWith(
     caches.match(e.request).then((cached) => {
-      if (cached) return cached
-      return fetch(e.request).then((res) => {
-        if (res.ok && e.request.url.startsWith(self.location.origin)) {
+      const network = fetch(e.request).then((res) => {
+        if (res.ok && url.origin === self.location.origin) {
           const clone = res.clone()
           caches.open(CACHE_NAME).then((cache) => cache.put(e.request, clone))
         }
         return res
-      })
+      }).catch(() => cached)
+      return cached || network
     })
   )
 })
