@@ -131,7 +131,7 @@ export default function Perfil() {
         style={{ backgroundColor: '#FFFFFF', boxShadow: '0 2px 8px rgba(0,0,0,0.06)', border: '1px solid #F0F0F0', borderColor: '#F0F0F0' }}
       >
         <ItemMenu icon={BookOpen}   label="Minhas receitas salvas"  valor={`${usuario.receitas_salvas}`} onClick={() => navigate('/receitas')} />
-        <ItemMenu icon={Calculator} label="Histórico de cálculos"                                         onClick={() => navigate('/calculadora')} />
+        <ItemMenu icon={Calculator} label="Histórico de cálculos"                                         onClick={() => navigate('/historico')} />
         <ItemMenu icon={Award}      label="Meus certificados"                                             onClick={() => navigate('/treinamentos')} />
         <ItemMenu icon={Settings}   label="Configurações da conta"                                        onClick={() => {}} />
       </div>

@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { TrendingUp, Save, FileDown, Package, Layers, DollarSign, Tag } from 'lucide-react'
+import { TrendingUp, Save, FileDown, Package, Layers, DollarSign, Tag, Check } from 'lucide-react'
 import PageLayout from '../components/PageLayout'
 import { calcularProducao, formatarMoeda, formatarKg } from '../lib/calculadora'
+import { salvarCalculo } from '../lib/historico'
 
 const GOLD = '#C9932A'
 const NAVY = '#0B1729'
@@ -86,6 +88,16 @@ export default function ResultadoCalculo() {
 
   const { form } = state
   const res = calcularProducao(form)
+  const [salvo, setSalvo] = useState(false)
+
+  useEffect(() => {
+    salvarCalculo(form, res)
+  }, [])
+
+  function handleSalvar() {
+    setSalvo(true)
+    setTimeout(() => setSalvo(false), 2000)
+  }
 
   return (
     <PageLayout voltar titulo="Resultado">
@@ -168,11 +180,12 @@ export default function ResultadoCalculo() {
         {/* Botões */}
         <div className="flex gap-3">
           <button
+            onClick={handleSalvar}
             className="flex-1 py-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2"
-            style={{ backgroundColor: NAVY, color: '#FFFFFF' }}
+            style={{ backgroundColor: salvo ? '#15803D' : NAVY, color: '#FFFFFF', transition: 'background 0.3s' }}
           >
-            <Save size={15} />
-            Salvar cálculo
+            {salvo ? <Check size={15} /> : <Save size={15} />}
+            {salvo ? 'Salvo!' : 'Salvar cálculo'}
           </button>
           <button
             className="flex-1 py-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2"
