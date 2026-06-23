@@ -2,6 +2,7 @@ import { useState, useCallback, useMemo } from 'react'
 import { buildContext } from './buildContext'
 import { buildSystemPrompt } from './systemPrompt'
 import { buscarCache, salvarCache } from './semanticCache'
+import { buscarFaq } from '../../data/faq'
 
 export function useEspecialista({ receitas, maquinas, maquinaUsuario = null }) {
   const [messages, setMessages] = useState([])
@@ -40,9 +41,14 @@ export function useEspecialista({ receitas, maquinas, maquinaUsuario = null }) {
 
     const apiKey = import.meta.env.VITE_ANTHROPIC_API_KEY
     if (!apiKey) {
+      // Modo offline: busca no FAQ local
+      const resultados = buscarFaq(textoUsuario)
+      const respostaOffline = resultados.length > 0
+        ? resultados.map(r => `**${r.pergunta}**\n${r.resposta}`).join('\n\n---\n\n')
+        : 'Não encontrei essa informação na minha base offline. Para dúvidas específicas, ligue para a Compacta Print: (11) 3188-7000.'
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: '⚠️ API não configurada. Adicione VITE_ANTHROPIC_API_KEY no .env para ativar o Roberto.',
+        content: `📴 *Modo offline — respondendo pela base de conhecimento local:*\n\n${respostaOffline}`,
         id: Date.now() + 1,
       }])
       setLoading(false)
