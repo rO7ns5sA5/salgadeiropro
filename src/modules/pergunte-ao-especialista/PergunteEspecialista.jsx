@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { Send } from 'lucide-react'
+import { Send, Camera, X } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { receitas } from '../../data/receitas'
 import { maquinas } from '../../data/maquinas'
@@ -76,11 +76,23 @@ function BubbleRoberto({ msg }) {
 function BubbleUser({ msg }) {
   return (
     <div className="flex justify-end mb-3">
-      <div
-        className="max-w-[80%] px-4 py-3 rounded-2xl rounded-br-sm text-sm leading-relaxed font-semibold"
-        style={{ background: 'linear-gradient(135deg, #C9932A, #E8B84B)', color: '#0B1729' }}
-      >
-        {msg.content}
+      <div className="max-w-[80%] flex flex-col gap-2 items-end">
+        {msg.imagem && (
+          <img
+            src={msg.imagem.url}
+            alt="Foto enviada"
+            className="rounded-2xl rounded-br-sm"
+            style={{ maxWidth: 220, maxHeight: 180, objectFit: 'cover' }}
+          />
+        )}
+        {msg.content && msg.content !== 'Analise esta imagem.' && (
+          <div
+            className="px-4 py-3 rounded-2xl rounded-br-sm text-sm leading-relaxed font-semibold"
+            style={{ background: 'linear-gradient(135deg, #C9932A, #E8B84B)', color: '#0B1729' }}
+          >
+            {msg.content}
+          </div>
+        )}
       </div>
     </div>
   )
@@ -90,9 +102,31 @@ export default function PergunteEspecialista({ maquinaUsuario = null }) {
   const navigate = useNavigate()
   const { messages, loading, enviar, limpar } = useEspecialista({ receitas, maquinas, maquinaUsuario })
   const [input, setInput] = useState('')
+  const [fotoPreview, setFotoPreview] = useState(null)
+  const [fotoData, setFotoData] = useState(null)
   const scrollRef = useRef(null)
   const textareaRef = useRef(null)
+  const cameraRef = useRef(null)
   const mostrarSugestoes = messages.length === 0
+
+  function selecionarFoto(e) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const url = URL.createObjectURL(file)
+    setFotoPreview(url)
+    const reader = new FileReader()
+    reader.onload = (ev) => {
+      const base64 = ev.target.result.split(',')[1]
+      setFotoData({ base64, mimeType: file.type || 'image/jpeg', url })
+    }
+    reader.readAsDataURL(file)
+    e.target.value = ''
+  }
+
+  function removerFoto() {
+    setFotoPreview(null)
+    setFotoData(null)
+  }
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -106,9 +140,11 @@ export default function PergunteEspecialista({ maquinaUsuario = null }) {
   }
 
   function submit() {
-    if (!input.trim() || loading) return
-    enviar(input.trim())
+    if ((!input.trim() && !fotoData) || loading) return
+    enviar(input.trim() || 'Analise esta imagem e me diga o que está errado ou como melhorar.', fotoData)
     setInput('')
+    setFotoPreview(null)
+    setFotoData(null)
     textareaRef.current?.focus()
   }
 
@@ -203,18 +239,46 @@ export default function PergunteEspecialista({ maquinaUsuario = null }) {
       {/* Input fixo */}
       <div
         className="fixed bottom-0 left-0 right-0 z-40"
-        style={{
-          maxWidth: 480,
-          margin: '0 auto',
-          backgroundColor: '#0B1729',
-          borderTop: '1px solid #1E3A5F',
-        }}
+        style={{ maxWidth: 480, margin: '0 auto', backgroundColor: '#0B1729', borderTop: '1px solid #1E3A5F' }}
       >
-        <div className="flex items-end gap-2 px-3 pt-3 pb-2">
+        {/* Preview da foto */}
+        {fotoPreview && (
+          <div className="px-3 pt-3 relative inline-block">
+            <img src={fotoPreview} alt="Preview" className="rounded-xl" style={{ height: 72, objectFit: 'cover' }} />
+            <button
+              onClick={removerFoto}
+              className="absolute top-2 right-0 w-5 h-5 rounded-full flex items-center justify-center"
+              style={{ backgroundColor: '#EF4444' }}
+            >
+              <X size={11} color="#fff" />
+            </button>
+          </div>
+        )}
+
+        <div className="flex items-end gap-2 px-3 pt-2 pb-2">
+          {/* Botão câmera */}
+          <button
+            onClick={() => cameraRef.current?.click()}
+            disabled={loading}
+            className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0"
+            style={{ backgroundColor: fotoPreview ? 'rgba(201,147,42,0.2)' : '#0F2040', border: `1px solid ${fotoPreview ? '#C9932A' : '#1E3A5F'}` }}
+          >
+            <Camera size={18} color={fotoPreview ? '#C9932A' : '#4A7A9B'} />
+          </button>
+
+          <input
+            ref={cameraRef}
+            type="file"
+            accept="image/*"
+            capture="environment"
+            onChange={selecionarFoto}
+            style={{ display: 'none' }}
+          />
+
           <textarea
             ref={textareaRef}
             rows={1}
-            placeholder="Digite sua dúvida técnica..."
+            placeholder={fotoPreview ? 'Descreva o problema (opcional)...' : 'Digite sua dúvida técnica...'}
             value={input}
             onChange={e => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
@@ -222,7 +286,7 @@ export default function PergunteEspecialista({ maquinaUsuario = null }) {
             className="flex-1 resize-none rounded-2xl px-4 py-3 text-sm outline-none transition-colors"
             style={{
               background: '#0B1729',
-              border: `1px solid ${input ? '#C9932A' : '#1E3A5F'}`,
+              border: `1px solid ${(input || fotoPreview) ? '#C9932A' : '#1E3A5F'}`,
               color: '#D0E8F5',
               maxHeight: 96,
               lineHeight: 1.5,
@@ -230,20 +294,18 @@ export default function PergunteEspecialista({ maquinaUsuario = null }) {
           />
           <button
             onClick={submit}
-            disabled={!input.trim() || loading}
+            disabled={(!input.trim() && !fotoData) || loading}
             className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 transition-all"
             style={{
-              background: input.trim() && !loading
-                ? 'linear-gradient(135deg, #C9932A, #E8B84B)'
-                : '#1E3A5F',
-              color: input.trim() && !loading ? '#0B1729' : '#3A5A7A',
+              background: (input.trim() || fotoData) && !loading ? 'linear-gradient(135deg, #C9932A, #E8B84B)' : '#1E3A5F',
+              color: (input.trim() || fotoData) && !loading ? '#0B1729' : '#3A5A7A',
             }}
           >
             <Send size={18} />
           </button>
         </div>
         <p className="text-center text-xs pb-2" style={{ color: '#1E3A5F' }}>
-          Enter envia · Shift+Enter nova linha
+          📷 Foto do salgado, bico ou painel para diagnóstico
         </p>
         <div style={{ height: 72 }} />
       </div>

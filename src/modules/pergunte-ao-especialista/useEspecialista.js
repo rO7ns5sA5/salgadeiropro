@@ -12,20 +12,29 @@ export function useEspecialista({ receitas, maquinas, maquinaUsuario = null }) {
     return buildSystemPrompt(ctx, maquinaUsuario)
   }, [receitas, maquinas, maquinaUsuario])
 
-  const enviar = useCallback(async (textoUsuario) => {
-    if (!textoUsuario.trim() || loading) return
+  const enviar = useCallback(async (textoUsuario, imagem = null) => {
+    if ((!textoUsuario.trim() && !imagem) || loading) return
 
-    const cached = buscarCache(textoUsuario)
-    if (cached) {
-      setMessages(prev => [
-        ...prev,
-        { role: 'user', content: textoUsuario, id: Date.now() },
-        { role: 'assistant', content: cached, fromCache: true, id: Date.now() + 1 },
-      ])
-      return
+    const msgUsuario = {
+      role: 'user',
+      content: textoUsuario || 'Analise esta imagem.',
+      imagem,
+      id: Date.now(),
     }
 
-    const novasMensagens = [...messages, { role: 'user', content: textoUsuario, id: Date.now() }]
+    if (!imagem) {
+      const cached = buscarCache(textoUsuario)
+      if (cached) {
+        setMessages(prev => [
+          ...prev,
+          msgUsuario,
+          { role: 'assistant', content: cached, fromCache: true, id: Date.now() + 1 },
+        ])
+        return
+      }
+    }
+
+    const novasMensagens = [...messages, msgUsuario]
     setMessages(novasMensagens)
     setLoading(true)
 
@@ -41,7 +50,18 @@ export function useEspecialista({ receitas, maquinas, maquinaUsuario = null }) {
     }
 
     try {
-      const apiMessages = novasMensagens.map(({ role, content }) => ({ role, content }))
+      const apiMessages = novasMensagens.map(({ role, content, imagem: img }) => {
+        if (img) {
+          return {
+            role,
+            content: [
+              { type: 'image', source: { type: 'base64', media_type: img.mimeType, data: img.base64 } },
+              { type: 'text', text: content },
+            ],
+          }
+        }
+        return { role, content }
+      })
 
       const res = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
@@ -63,7 +83,7 @@ export function useEspecialista({ receitas, maquinas, maquinaUsuario = null }) {
       const resposta = data.content?.find(b => b.type === 'text')?.text
         ?? 'Não consegui processar. Tente novamente.'
 
-      salvarCache(textoUsuario, resposta)
+      if (!imagem) salvarCache(textoUsuario, resposta)
       setMessages(prev => [...prev, { role: 'assistant', content: resposta, id: Date.now() + 1 }])
     } catch {
       setMessages(prev => [...prev, {

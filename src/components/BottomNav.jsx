@@ -1,13 +1,12 @@
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Home, BookOpen, Wrench, GraduationCap, User, Bot } from 'lucide-react'
+import { Home, BookOpen, Wrench, GraduationCap, User, ScanSearch } from 'lucide-react'
 
 const navItems = [
-  { label: 'Início',       icon: Home,          path: '/' },
-  { label: 'Receitas',     icon: BookOpen,       path: '/receitas' },
-  { label: 'Ferramentas',  icon: Wrench,         path: '/calculadora' },
-  { label: 'Aprender',     icon: GraduationCap,  path: '/treinamentos' },
-  { label: 'Especialista', icon: Bot,            path: '/especialista', badge: 'IA' },
-  { label: 'Perfil',       icon: User,           path: '/perfil' },
+  { label: 'Início',      icon: Home,         path: '/home' },
+  { label: 'Receitas',    icon: BookOpen,      path: '/receitas' },
+  { label: 'Calcular',    icon: Wrench,        path: '/calculadora' },
+  { label: 'Diagnóstico', icon: ScanSearch,    path: '/diagnostico', badge: 'IA' },
+  { label: 'Perfil',      icon: User,          path: '/perfil' },
 ]
 
 const GOLD = '#C9932A'
@@ -27,7 +26,7 @@ export default function BottomNav({ dark = false }) {
         borderTop,
         height: 64,
         paddingBottom: 'env(safe-area-inset-bottom)',
-        maxWidth: 480,
+        maxWidth: 860,
         margin: '0 auto',
       }}
     >
