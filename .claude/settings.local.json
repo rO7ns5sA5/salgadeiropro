@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "mcp__Claude_Preview__preview_start",
-      "WebFetch(domain:compactaprint.com.br)"
+      "WebFetch(domain:compactaprint.com.br)",
+      "WebFetch(domain:www.youtube.com)"
     ]
   }
 }

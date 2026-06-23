@@ -9,6 +9,7 @@ import ResultadoCalculo from './pages/ResultadoCalculo'
 import Historico from './pages/Historico'
 import ListaCompras from './pages/ListaCompras'
 import Diagnostico from './pages/Diagnostico'
+import TvCompacta from './pages/TvCompacta'
 import Maquinas from './pages/Maquinas'
 import MaquinaDetalhe from './pages/MaquinaDetalhe'
 import Roberto from './pages/Roberto'
@@ -30,6 +31,7 @@ export default function App() {
         <Route path="/historico" element={<Historico />} />
         <Route path="/lista-compras" element={<ListaCompras />} />
         <Route path="/diagnostico" element={<Diagnostico />} />
+        <Route path="/tv" element={<TvCompacta />} />
         <Route path="/maquinas" element={<Maquinas />} />
         <Route path="/maquinas/:id" element={<MaquinaDetalhe />} />
         <Route path="/roberto" element={<Roberto />} />
