@@ -6,78 +6,45 @@ import PageLayout from '../components/PageLayout'
 const GOLD = '#C9932A'
 const NAVY = '#0B1729'
 
-const categorias = ['Todos', 'Tutoriais', 'Receitas', 'Manutenção', 'Máquinas', 'Dicas']
+const categorias = ['Todos', 'Montagem', 'Regulagem', 'Bicos', 'Receitas', 'Manutenção', 'Máquinas', 'Dicas']
 
 const videos = [
+  // ── Modeladoras — Montagem e Regulagem ──────────────────────────────────
   {
-    id: 'J8k2mR2XVXY',
-    titulo: 'Como usar a modeladora de salgados Pop 4.0',
-    categoria: 'Tutoriais',
-    duracao: '8:24',
-    descricao: 'Passo a passo completo para operar a Pop 4.0',
+    id: 'i1HYRF25B2M',
+    titulo: 'Como MONTAR e REGULAR a MÁQUINA DE FAZER SALGADOS?',
+    categoria: 'Montagem',
+    descricao: 'Guia completo de montagem e regulagem da modeladora Compacta Print',
   },
   {
-    id: 'tQMkzb-GQMU',
-    titulo: 'Massa de coxinha perfeita para modeladora',
-    categoria: 'Receitas',
-    duracao: '6:12',
-    descricao: 'Receita e ponto ideal para modelar na máquina',
+    id: 'RUiJTyumVDI',
+    titulo: 'Como montar a máquina Compacta Print para fazer Coxinha',
+    categoria: 'Montagem',
+    descricao: 'Passo a passo de montagem focado na coxinha',
   },
   {
-    id: 'F2kT9X3PLWQ',
-    titulo: 'Limpeza e manutenção da modeladora Compacta',
-    categoria: 'Manutenção',
-    duracao: '5:45',
-    descricao: 'Como limpar corretamente após cada uso',
+    id: 'scbTNcXoixc',
+    titulo: 'Regulando Modeladora Compacta Print',
+    categoria: 'Regulagem',
+    descricao: 'Aprenda a regular corretamente sua modeladora',
   },
   {
-    id: 'R9mNpK7VZEX',
-    titulo: 'Black Inox — apresentação completa da máquina',
-    categoria: 'Máquinas',
-    duracao: '10:33',
-    descricao: 'Conheça todos os recursos da linha Black Inox',
+    id: 'lTAkulOlnaE',
+    titulo: 'Como regular a parede dos salgados',
+    categoria: 'Regulagem',
+    descricao: 'Dica de produção para ajustar a espessura da massa',
   },
   {
-    id: 'W4kLpQ8MZRN',
-    titulo: 'Regulagem do painel — massa, recheio e cortador',
-    categoria: 'Tutoriais',
-    duracao: '7:18',
-    descricao: 'Como calibrar os ajustes para cada tipo de salgado',
+    id: 'M61XqDtNN88',
+    titulo: 'Que bico usar para salgados na Compacta Print?',
+    categoria: 'Bicos',
+    descricao: 'Guia de bicos por formato de salgado',
   },
   {
-    id: 'Y7nXpR5KVSM',
-    titulo: 'Risole e bolinha — troca de bico passo a passo',
-    categoria: 'Tutoriais',
-    duracao: '4:55',
-    descricao: 'Como trocar bico e mandíbula corretamente',
-  },
-  {
-    id: 'B3pQmK9WZXL',
-    titulo: 'Dicas para não rachar a coxinha na fritura',
-    categoria: 'Dicas',
-    duracao: '3:40',
-    descricao: 'Erros comuns e como evitar',
-  },
-  {
-    id: 'C8nLqP6YZMW',
-    titulo: 'Inox Supreme — capacidade e ajustes de produção',
-    categoria: 'Máquinas',
-    duracao: '9:10',
-    descricao: 'Produção profissional com a Inox Supreme',
-  },
-  {
-    id: 'D2mRpN4XKVS',
-    titulo: 'Massa de kibe e croquete para modeladora',
-    categoria: 'Receitas',
-    duracao: '5:30',
-    descricao: 'Proporções e textura ideal para cada formato',
-  },
-  {
-    id: 'E5kQmL7WZRY',
-    titulo: 'Empanadeira Black Turbo — como usar e limpar',
-    categoria: 'Máquinas',
-    duracao: '6:48',
-    descricao: 'Tutorial completo da empanadeira',
+    id: 'wT6d_R27nj0',
+    titulo: 'Bicos de massa e recheio — Mandíbulas e Cortadores POP 4.0',
+    categoria: 'Bicos',
+    descricao: 'Quais bicos usar em cada situação na Pop 4.0',
   },
 ]
 
