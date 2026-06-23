@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { TrendingUp, Save, FileDown, Package, Layers, DollarSign, Tag, Check } from 'lucide-react'
+import { TrendingUp, Save, FileDown, Package, Layers, DollarSign, Tag, Check, ShoppingCart } from 'lucide-react'
 import PageLayout from '../components/PageLayout'
 import { calcularProducao, formatarMoeda, formatarKg } from '../lib/calculadora'
 import { salvarCalculo } from '../lib/historico'
@@ -195,6 +195,15 @@ export default function ResultadoCalculo() {
             Exportar PDF
           </button>
         </div>
+
+        <button
+          onClick={() => navigate('/lista-compras', { state: { form } })}
+          className="w-full py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2"
+          style={{ backgroundColor: '#F0FDF4', color: '#15803D', border: '1.5px solid #BBF7D0' }}
+        >
+          <ShoppingCart size={16} />
+          Gerar lista de compras
+        </button>
 
         <button
           onClick={() => navigate('/calculadora')}
