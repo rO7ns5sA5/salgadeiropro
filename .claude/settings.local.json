@@ -3,7 +3,10 @@
     "allow": [
       "mcp__Claude_Preview__preview_start",
       "WebFetch(domain:compactaprint.com.br)",
-      "WebFetch(domain:www.youtube.com)"
+      "WebFetch(domain:www.youtube.com)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)"
     ]
   }
 }
