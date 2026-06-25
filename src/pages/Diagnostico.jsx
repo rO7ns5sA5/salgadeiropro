@@ -14,8 +14,12 @@ export default function Diagnostico() {
   const [searchParams] = useSearchParams()
   const maquinaParamInicial = searchParams.get('maquina')
 
+  const noAtualInicial = maquinaParamInicial
+    ? (diagnostico.maquinas[maquinaParamInicial]?.arvore?.raiz ?? 'q_sintoma')
+    : 'q_sintoma'
+
   const [maquinaId, setMaquinaId]     = useState(maquinaParamInicial)
-  const [noAtual, setNoAtual]         = useState('raiz')
+  const [noAtual, setNoAtual]         = useState(noAtualInicial)
   const [historico, setHistorico]     = useState([])
   const [aba, setAba]                 = useState('diagnostico') // 'diagnostico' | 'biblioteca'
   const [filtroBiblioteca, setFiltro] = useState(null)          // string[] | null
@@ -28,8 +32,9 @@ export default function Diagnostico() {
   const progresso = Math.min(historico.length / 4, 0.9)
 
   function selecionarMaquina(id) {
+    const raiz = diagnostico.maquinas[id]?.arvore?.raiz ?? 'q_sintoma'
     setMaquinaId(id)
-    setNoAtual('raiz')
+    setNoAtual(raiz)
     setHistorico([])
   }
 
@@ -39,13 +44,14 @@ export default function Diagnostico() {
   }
 
   function voltar() {
-    const anterior = historico.at(-1) ?? 'raiz'
+    const raiz = diagnostico.maquinas[maquinaId]?.arvore?.raiz ?? 'q_sintoma'
+    const anterior = historico.at(-1) ?? raiz
     setHistorico((h) => h.slice(0, -1))
     setNoAtual(anterior)
   }
 
   function reiniciar() {
-    setNoAtual('raiz')
+    setNoAtual('q_sintoma')
     setHistorico([])
     setMaquinaId(null)
     setFiltro(null)

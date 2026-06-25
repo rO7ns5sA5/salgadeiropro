@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Settings, Wrench, AlertTriangle, Lightbulb, X, Zap, Package, Ruler, Shield, Clock } from 'lucide-react'
 import PageLayout from '../components/PageLayout'
 import { maquinas } from '../data/maquinas'
+import { diagnostico } from '../data/diagnostico'
 
 function InfograficoBarra({ label, valor, max, cor = '#C49A2A' }) {
   const pct = Math.round((valor / max) * 100)
@@ -528,14 +529,16 @@ export default function MaquinaDetalhe() {
             </div>
           )}
 
-          {/* Botão Diagnosticar */}
-          <button
-            onClick={() => navigate(`/diagnostico?maquina=${maquina.id}`)}
-            className="w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 mb-3"
-            style={{ backgroundColor: 'transparent', color: '#C9932A', border: '1.5px solid #C9932A', borderRadius: 12 }}
-          >
-            🔧 Diagnosticar problema
-          </button>
+          {/* Botão Diagnosticar — só aparece se a máquina tem árvore de diagnóstico */}
+          {diagnostico.maquinas[maquina.id] && (
+            <button
+              onClick={() => navigate(`/diagnostico?maquina=${maquina.id}`)}
+              className="w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 mb-3"
+              style={{ backgroundColor: 'transparent', color: '#C9932A', border: '1.5px solid #C9932A', borderRadius: 12 }}
+            >
+              🔧 Diagnosticar problema
+            </button>
+          )}
 
         </div>
       </div>
