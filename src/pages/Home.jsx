@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Calculator, Bot, BookOpen, Settings, Play, FolderOpen } from 'lucide-react'
+import { Calculator, Bot, BookOpen, Settings, Play, FolderOpen, Wrench } from 'lucide-react'
 import PageLayout from '../components/PageLayout'
 
 const GOLD = '#C9932A'
@@ -12,6 +12,7 @@ const modulos = [
   { label: 'Máquinas Compacta',    desc: 'Pop 4.0, Black Inox e mais',  icon: Settings,   path: '/maquinas' },
   { label: 'Treinamentos',         desc: 'Cursos em vídeo',             icon: Play,       path: '/treinamentos' },
   { label: 'Biblioteca técnica',   desc: 'Manuais e documentos',        icon: FolderOpen, path: '/treinamentos' },
+  { label: 'Diagnosticar Máquina', desc: 'Identifique e resolva problemas', icon: Wrench, path: '/diagnostico' },
 ]
 
 export default function Home() {

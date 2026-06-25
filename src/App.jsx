@@ -16,6 +16,7 @@ import Roberto from './pages/Roberto'
 import Treinamentos from './pages/Treinamentos'
 import Perfil from './pages/Perfil'
 import PergunteEspecialista from './modules/pergunte-ao-especialista'
+import Diagnostico from './pages/Diagnostico'
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
         <Route path="/treinamentos" element={<Treinamentos />} />
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/especialista" element={<PergunteEspecialista />} />
+        <Route path="/diagnostico" element={<Diagnostico />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

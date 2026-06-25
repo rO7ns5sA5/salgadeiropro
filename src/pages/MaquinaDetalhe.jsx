@@ -527,6 +527,16 @@ export default function MaquinaDetalhe() {
               </ul>
             </div>
           )}
+
+          {/* Botão Diagnosticar */}
+          <button
+            onClick={() => navigate(`/diagnostico?maquina=${maquina.id}`)}
+            className="w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 mb-3"
+            style={{ backgroundColor: 'transparent', color: '#C9932A', border: '1.5px solid #C9932A', borderRadius: 12 }}
+          >
+            🔧 Diagnosticar problema
+          </button>
+
         </div>
       </div>
 
