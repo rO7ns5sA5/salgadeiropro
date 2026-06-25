@@ -1,4 +1,4 @@
-const CACHE_NAME = 'salgadeiropro-v2'
+const CACHE_NAME = 'salgadeiropro-v3'
 
 const STATIC_ASSETS = [
   '/',
