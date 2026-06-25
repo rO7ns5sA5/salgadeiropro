@@ -36,17 +36,25 @@ export default function Splash() {
         maxWidth: 480, margin: '0 auto',
       }}
     >
-      {/* Elemento assinatura: animação de extrusão → corte */}
+      {/* Elemento assinatura: ponto → extrusão → gota coxinha */}
       <div
         style={{
-          width:  phase >= 3 ? 72 : phase >= 2 ? 148 : phase >= 1 ? 12 : 0,
-          height: phase >= 3 ? 72 : phase >= 2 ? 26  : phase >= 1 ? 12 : 0,
-          borderRadius: '50%',
+          width:  phase >= 3 ? 58  : phase >= 2 ? 148 : phase >= 1 ? 12 : 0,
+          height: phase >= 3 ? 82  : phase >= 2 ? 26  : phase >= 1 ? 12 : 0,
+          borderRadius: phase >= 3
+            ? '50% 50% 42% 42% / 6% 6% 94% 94%'
+            : '50%',
+          transform: phase >= 3 ? 'rotate(180deg)' : 'rotate(0deg)',
           backgroundColor: GOLD,
           flexShrink: 0,
           marginBottom: 40,
           transition: phase === 3
-            ? 'width 0.18s cubic-bezier(0.175,0.885,0.32,1.5), height 0.18s cubic-bezier(0.175,0.885,0.32,1.5)'
+            ? [
+                'width 0.22s cubic-bezier(0.175,0.885,0.32,1.6)',
+                'height 0.22s cubic-bezier(0.175,0.885,0.32,1.6)',
+                'border-radius 0.22s cubic-bezier(0.175,0.885,0.32,1.6)',
+                'transform 0.22s cubic-bezier(0.175,0.885,0.32,1.6)',
+              ].join(', ')
             : 'width 0.38s cubic-bezier(0.4,0,0.2,1), height 0.38s cubic-bezier(0.4,0,0.2,1)',
         }}
       />
